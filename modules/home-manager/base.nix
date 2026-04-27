@@ -22,12 +22,6 @@
       enable = true;
       enableZshIntegration = true;
     };
-    zellij = {
-      enable = true;
-      settings = {
-        theme = "dracula";
-      };
-    };
     tealdeer = {
       enable = true;
       settings.updates.auto_update = true;
@@ -39,13 +33,11 @@
     };
     bat.enable = true;
     btop.enable = true;
-    gallery-dl.enable = true;
     fastfetch.enable = true;
     htop.enable = true;
     lsd.enable = true;
     nh.enable = true;
     vim.enable = true;
-    yt-dlp.enable = true;
     ripgrep.enable = true;
     fd.enable = true;
   };
