@@ -2,8 +2,10 @@ keys:
   # Add your machine's age public key here after running install.sh
   # The key is printed during install under "Converting initrd public SSH host key into public age key for sops-nix"
   - &think1clift age1ek0npcn04kva8gn4jm76tza5yrwtfgk2mtyhykhvuxpfam3et5xqyp8jx4
+  - &dellcos age17er3p56wlm5y840gjamz7hpgmp0mxyall0s6sn5t22wkqu746fvq2l9hsu
 creation_rules:
   - path_regex: secrets/[^/]+(\.(yaml|json|env|ini|conf))?$
     key_groups:
       - age:
           - *think1clift
+          - *dellcos

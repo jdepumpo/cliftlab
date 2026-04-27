@@ -12,6 +12,10 @@
 
     ./../../modules/nixos/base.nix
     ./../../modules/nixos/remote-unlock.nix
+
+    ./../../services/tailscale.nix
+    ./../../services/traefik.nix
+    ./../../services/cloudflared.nix
   ];
 
   home-manager = {
