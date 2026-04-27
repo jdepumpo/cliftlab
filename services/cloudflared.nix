@@ -1,7 +1,6 @@
 {config, ...}: {
   sops.secrets.cloudflare-tunnel = {
-    owner = "cloudflared";
-    mode = "0400";
+    mode = "0444";
   };
 
   services.cloudflared = {
