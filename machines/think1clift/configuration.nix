@@ -11,6 +11,7 @@
     ./hardware-configuration.nix
 
     ./../../modules/nixos/base.nix
+    ./../../modules/nixos/remote-unlock.nix
   ];
 
   home-manager = {
