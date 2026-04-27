@@ -1,72 +1,22 @@
-{
-  pkgs,
-  inputs,
-  osConfig,
-  ...
-}: let
-  pkgs-unstable = import inputs.nixpkgs-unstable {
-    system = pkgs.stdenv.hostPlatform.system;
-    config.allowUnfree = true;
-  };
-in {
-  home = {
-    packages = with pkgs;
-      [
-        asciinema
-        asciinema-agg
-        asciiquarium
-        cbonsai
-        clolcat
-        cmatrix
-        croc
-        curl
-        dig
-        dust
-        dua
-        duf
-        figlet
-        fortune-kind
-        gdu
-        genact
-        glow
-        gti
-        hyperfine
-        imagemagick
-        openssl
-        jq
-        kopia
-        neo-cowsay
-        pandoc
-        pipes-rs
-        poppler-utils
-        qrencode
-        tree
-        wget
-      ]
-      ++ (
-        if builtins.substring 0 3 osConfig.networking.hostName != "svr"
-        then [
-          # Below packages are for personal machines only; excluded from servers
-          # inspo: https://discourse.nixos.org/t/how-to-use-hostname-in-a-path/42612/3
-          alejandra
-          bun
-          doppler
-          just
-          gnupg1
-          ffmpeg
-          nil
-          nixos-rebuild # need for macOS
-          nixd # need for language server
-          nodejs
-          pkgs-unstable.codex
-          sops
-          statix
-          stripe-cli
-          zola
-        ]
-        else [
-          # Below packages are for servers only; excluded from personal machines
-        ]
-      );
-  };
+{pkgs, ...}: {
+  home.packages = with pkgs; [
+    alejandra
+    croc
+    curl
+    dig
+    dua
+    duf
+    dust
+    gdu
+    hyperfine
+    imagemagick
+    jq
+    just
+    nil
+    openssl
+    sops
+    statix
+    tree
+    wget
+  ];
 }
