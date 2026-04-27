@@ -4,6 +4,7 @@
   ...
 }: {
   boot.kernelParams = ["ip=dhcp"];
+  boot.initrd.availableKernelModules = ["e1000e"];
   boot.initrd.network = {
     enable = true;
     ssh = {
