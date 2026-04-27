@@ -14,13 +14,8 @@
       k = "kubectl ";
       tf = "terraform ";
     };
-    # inspo: https://discourse.nixos.org/t/brew-not-on-path-on-m1-mac/26770/4
     initContent = ''
       fortune
-
-      if [[ $(uname -m) == 'arm64' ]] && [[ $(uname -s) == 'Darwin' ]]; then
-        eval "$(/opt/homebrew/bin/brew shellenv)"
-      fi
 
       if [ -z "$SSH_AUTH_SOCK" ]; then
         eval "$(ssh-agent -s)" &> /dev/null

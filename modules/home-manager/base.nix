@@ -1,6 +1,4 @@
 {
-  lib,
-  pkgs,
   vars,
   osConfig,
   ...
@@ -12,14 +10,8 @@
 
   home = {
     username = vars.userName;
-    homeDirectory = lib.mkMerge [
-      (lib.mkIf pkgs.stdenv.isLinux "/home/${vars.userName}")
-      (lib.mkIf pkgs.stdenv.isDarwin "/Users/${vars.userName}")
-    ];
+    homeDirectory = "/home/${vars.userName}";
     stateVersion = "23.11";
-    sessionVariables = lib.mkIf pkgs.stdenv.isDarwin {
-      SOPS_AGE_KEY_FILE = "$HOME/.config/sops/age/keys.txt";
-    };
   };
 
   programs = {
@@ -62,7 +54,5 @@
     fd.enable = true;
   };
 
-  # Nicely reload system units when changing configs
-  # Self-note: nix-darwin seems to luckily ignore this setting
   systemd.user.startServices = "sd-switch";
 }

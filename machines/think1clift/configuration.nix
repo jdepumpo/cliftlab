@@ -24,5 +24,5 @@
     };
   };
 
-  networking.hostName = "m710q";
+  networking.hostName = "think1clift";
 }

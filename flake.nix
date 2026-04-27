@@ -38,13 +38,13 @@
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
     nixosConfigurations = {
-      m710q = mkNixOSConfig ./machines/m710q/configuration.nix;
-      iso1chng = nixpkgs.lib.nixosSystem {
+      think1clift = mkNixOSConfig ./machines/think1clift/configuration.nix;
+      iso1clift = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {inherit inputs outputs vars;};
         modules = [
           (nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix")
-          ./machines/iso1chng/configuration.nix
+          ./machines/iso1clift/configuration.nix
         ];
       };
     };
