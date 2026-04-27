@@ -31,13 +31,13 @@ if [ "$(uname)" == "Darwin" ]; then
   echo -e "\n\033[1;32mAll steps completed successfully. nix-darwin is now ready to be installed.\033[0m\n"
   echo -e "To install nix-darwin configuration, run the following commands:\n"
   echo -e "\033[1m. /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh\033[0m\n"
-  echo -e "\033[1mnix run nix-darwin -- switch --flake github:eh8/chenglab#mac1chng\033[0m\n"
+  echo -e "\033[1mnix run nix-darwin -- switch --flake github:jdepumpo/cliftlab#mac1chng\033[0m\n"
   echo -e "Remember to add the new host public key to sops-nix!"
 elif [ "$(uname)" == "Linux" ]; then
-  # Define disk
-  DISK="/dev/nvme0n1"
-  DISK_BOOT_PARTITION="/dev/nvme0n1p1"
-  DISK_NIX_PARTITION="/dev/nvme0n1p2"
+  # Define disk — verify with `lsblk` before running (sda for SATA, nvme0n1 for NVMe)
+  DISK="/dev/sda"
+  DISK_BOOT_PARTITION="/dev/sda1"
+  DISK_NIX_PARTITION="/dev/sda2"
 
   # Display warning and wait for confirmation to proceed
   echo "Linux detected"
@@ -107,5 +107,5 @@ elif [ "$(uname)" == "Linux" ]; then
   echo -e "\n\033[1;32mAll steps completed successfully. NixOS is now ready to be installed.\033[0m\n"
   echo -e "Remember to commit and push the new server's public host key to sops-nix/update all sops encrypted files before installing!"
   echo -e "To install NixOS configuration for hostname, run the following command:\n"
-  echo -e "\033[1msudo nixos-install --no-root-passwd --root /mnt --flake github:eh8/chenglab#hostname\033[0m\n"
+  echo -e "\033[1msudo nixos-install --no-root-passwd --root /mnt --flake github:jdepumpo/cliftlab#hostname\033[0m\n"
 fi
