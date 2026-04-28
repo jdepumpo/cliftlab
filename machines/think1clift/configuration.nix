@@ -16,6 +16,7 @@
     ./../../services/tailscale.nix
     ./../../services/traefik.nix
     ./../../services/cloudflared.nix
+    ./../../services/nixarr.nix
   ];
 
   home-manager = {

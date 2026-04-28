@@ -16,6 +16,11 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixarr = {
+      url = "github:rasmus-kirk/nixarr";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -32,7 +37,7 @@
     mkNixOSConfig = path:
       nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs vars;};
-        modules = [path];
+        modules = [inputs.nixarr.nixosModules.default path];
       };
   in {
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
