@@ -2,14 +2,12 @@ default:
     just --list
 
 deploy machine='' ip='':
-    @if [ "$(uname)" = "Darwin" ] && [ -z "{{ machine }}" ] && [ -z "{{ ip }}" ]; then \
-      sudo darwin-rebuild switch --flake .; \
-    elif [ -z "{{ machine }}" ] && [ -z "{{ ip }}" ]; then \
-      nixos-rebuild switch --sudo --flake .; \
+    @if [ -z "{{ machine }}" ] && [ -z "{{ ip }}" ]; then \
+      sudo nixos-rebuild switch --flake .; \
     elif [ -z "{{ ip }}" ]; then \
-      nixos-rebuild switch --sudo --flake ".#{{ machine }}"; \
+      sudo nixos-rebuild switch --flake ".#{{ machine }}"; \
     else \
-      nixos-rebuild switch --fast --flake ".#{{ machine }}" --sudo --target-host "eh8@{{ ip }}" --build-host "eh8@{{ ip }}"; \
+      nixos-rebuild switch --fast --flake ".#{{ machine }}" --sudo --target-host "joseph@{{ ip }}" --build-host "joseph@{{ ip }}"; \
     fi
 
 up:
@@ -37,4 +35,4 @@ sops-update:
     for file in secrets/*; do sops updatekeys "$file"; done
 
 build-iso:
-    nix build .#nixosConfigurations.iso1chng.config.system.build.isoImage
+    nix build .#nixosConfigurations.iso1clift.config.system.build.isoImage

@@ -91,6 +91,7 @@
       "/var/log"
       # inspo: https://github.com/nix-community/impermanence/issues/178
       "/var/lib/nixos"
+      "/var/lib/NetworkManager"
     ];
 
     files = [
