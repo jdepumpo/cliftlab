@@ -26,7 +26,7 @@
     lidarr.enable = true;
     bazarr.enable = true;
 
-    qbittorrent = {
+    transmission = {
       enable = true;
       vpn.enable = true;
     };

@@ -36,3 +36,6 @@ sops-update:
 
 build-iso:
     nix build .#nixosConfigurations.iso1clift.config.system.build.isoImage
+
+deploy-remote machine='' ip='':
+    nix run nixpkgs#nixos-rebuild -- switch --fast --flake ".#{{ machine }}" --sudo --target-host "joseph@{{ ip }}" --build-host "joseph@{{ ip }}"
