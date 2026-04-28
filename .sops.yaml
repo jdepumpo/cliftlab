@@ -8,3 +8,8 @@ creation_rules:
       - age:
           - *think1clift
           - *joseph
+  - path_regex: secrets/cloudflare-tunnel$
+    key_groups:
+      - age:
+          - *think1clift
+          - *joseph
