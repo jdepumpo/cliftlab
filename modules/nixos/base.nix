@@ -46,7 +46,7 @@
   users.users.${vars.userName} = {
     isNormalUser = true;
     description = vars.userName;
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["wheel"];
     openssh.authorizedKeys.keys = [
       vars.sshPublicKeyPersonal
     ];
@@ -68,14 +68,8 @@
 
   networking = {
     firewall.enable = true;
-    networkmanager.enable = true;
-  };
-
-  # inspo: https://github.com/NixOS/nixpkgs/issues/180175#issuecomment-1658731959
-  systemd.services.NetworkManager-wait-online = {
-    serviceConfig = {
-      ExecStart = ["" "${pkgs.networkmanager}/bin/nm-online -q"];
-    };
+    useDHCP = false;
+    nameservers = ["1.1.1.1" "1.0.0.1" "2606:4700:4700::1111" "2606:4700:4700::1001"];
   };
 
   programs.zsh.enable = true;
@@ -91,7 +85,6 @@
       "/var/log"
       # inspo: https://github.com/nix-community/impermanence/issues/178
       "/var/lib/nixos"
-      "/var/lib/NetworkManager"
     ];
 
     files = [

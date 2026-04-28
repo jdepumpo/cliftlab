@@ -30,5 +30,20 @@
     };
   };
 
-  networking.hostName = "think1clift";
+  networking = {
+    hostName = "think1clift";
+    interfaces.enp0s31f6 = {
+      ipv4.addresses = [{
+        address = "192.168.0.204";
+        prefixLength = 24;
+      }];
+      # IPv6 via SLAAC (router advertisement) — no static address needed
+      ipv6.addresses = [];
+    };
+    defaultGateway = "192.168.0.1";
+    defaultGateway6 = {
+      address = "";
+      interface = "enp0s31f6";
+    };
+  };
 }
