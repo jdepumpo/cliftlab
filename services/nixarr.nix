@@ -4,18 +4,22 @@
   lib,
   ...
 }: let
-  mkRoute = name: port: {
-    routers.${name} = {
-      rule = "Host(`${name}.clift.one`)";
-      service = name;
-      entryPoints = ["web"];
-    };
-    routers."${name}-secure" = {
-      rule = "Host(`${name}.clift.one`)";
-      service = name;
-      entryPoints = ["websecure"];
-      tls.certResolver = "cloudflare";
-    };
+  mkRoute = name: port: protected: {
+    routers.${name} =
+      {
+        rule = "Host(`${name}.clift.one`)";
+        service = name;
+        entryPoints = ["web"];
+      }
+      // lib.optionalAttrs protected {middlewares = ["authelia"];};
+    routers."${name}-secure" =
+      {
+        rule = "Host(`${name}.clift.one`)";
+        service = name;
+        entryPoints = ["websecure"];
+        tls.certResolver = "cloudflare";
+      }
+      // lib.optionalAttrs protected {middlewares = ["authelia"];};
     services.${name} = {
       loadBalancer.servers = [{url = "http://localhost:${toString port}";}];
     };
@@ -56,14 +60,33 @@ in {
   };
 
   services.traefik.dynamicConfigOptions.http = lib.foldl lib.recursiveUpdate {} [
-    (mkRoute "jellyfin" 8096)
-    (mkRoute "sonarr" 8989)
-    (mkRoute "radarr" 7878)
-    (mkRoute "lidarr" 8686)
-    (mkRoute "prowlarr" 9696)
-    (mkRoute "bazarr" 6767)
-    (mkRoute "transmission" 9091)
-    (mkRoute "sabnzbd" 8085)
+    {
+      middlewares.authelia.forwardAuth = {
+        address = "http://127.0.0.1:9091/api/authz/forward-auth";
+        trustForwardHeader = true;
+        authResponseHeaders = ["Remote-User" "Remote-Groups" "Remote-Email" "Remote-Name"];
+      };
+      routers.authelia = {
+        rule = "Host(`auth.clift.one`)";
+        service = "authelia";
+        entryPoints = ["web"];
+      };
+      routers."authelia-secure" = {
+        rule = "Host(`auth.clift.one`)";
+        service = "authelia";
+        entryPoints = ["websecure"];
+        tls.certResolver = "cloudflare";
+      };
+      services.authelia.loadBalancer.servers = [{url = "http://127.0.0.1:9091";}];
+    }
+    (mkRoute "jellyfin" 8096 false)
+    (mkRoute "sonarr" 8989 true)
+    (mkRoute "radarr" 7878 true)
+    (mkRoute "lidarr" 8686 true)
+    (mkRoute "prowlarr" 9696 true)
+    (mkRoute "bazarr" 6767 true)
+    (mkRoute "transmission" 9091 true)
+    (mkRoute "sabnzbd" 8085 true)
   ];
 
   # Intel QSV / VA-API hardware transcoding for Jellyfin (M710q iGPU)

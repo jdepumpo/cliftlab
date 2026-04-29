@@ -16,6 +16,7 @@
     ./../../services/tailscale.nix
     ./../../services/traefik.nix
     ./../../services/cloudflared.nix
+    ./../../services/authelia.nix
     ./../../services/nixarr.nix
   ];
 
