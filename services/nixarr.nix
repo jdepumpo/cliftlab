@@ -79,7 +79,25 @@ in {
       };
       services.authelia.loadBalancer.servers = [{url = "http://127.0.0.1:9092";}];
     }
-    (mkRoute "cloud" 9200 false)
+    {
+      # OpenCloud always uses HTTPS internally — skip TLS verification since it's a self-signed cert
+      serversTransports.opencloud.insecureSkipVerify = true;
+      routers.cloud = {
+        rule = "Host(`cloud.clift.one`)";
+        service = "cloud";
+        entryPoints = ["web"];
+      };
+      routers."cloud-secure" = {
+        rule = "Host(`cloud.clift.one`)";
+        service = "cloud";
+        entryPoints = ["websecure"];
+        tls.certResolver = "cloudflare";
+      };
+      services.cloud.loadBalancer = {
+        servers = [{url = "https://localhost:9200";}];
+        serversTransport = "opencloud";
+      };
+    }
     (mkRoute "ha" 8123 false)
     (mkRoute "z2m" 8080 true)
     (mkRoute "music" 8095 true)
