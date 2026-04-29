@@ -53,7 +53,6 @@
   services.zigbee2mqtt = {
     enable = true;
     settings = {
-      homeassistant = true;
       permit_join = false;
       mqtt.server = "mqtt://localhost:1883";
       serial.port = "/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0";
