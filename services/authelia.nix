@@ -7,7 +7,13 @@
   sops.secrets."authelia-session-secret".owner = "authelia-main";
   sops.secrets."authelia-storage-key".owner = "authelia-main";
   sops.secrets."authelia-user-password-hash" = {};
-  sops.secrets."authelia-smtp-password".owner = "authelia-main";
+  sops.secrets."authelia-smtp-password" = {};
+  sops.templates."authelia-env" = {
+    content = ''
+      AUTHELIA_NOTIFIER_SMTP_PASSWORD=${config.sops.placeholder."authelia-smtp-password"}
+    '';
+    owner = "authelia-main";
+  };
 
   sops.templates."authelia-users" = {
     content = ''
@@ -70,7 +76,9 @@
       jwtSecretFile = config.sops.secrets."authelia-jwt-secret".path;
       sessionSecretFile = config.sops.secrets."authelia-session-secret".path;
       storageEncryptionKeyFile = config.sops.secrets."authelia-storage-key".path;
-      smtpPasswordFile = config.sops.secrets."authelia-smtp-password".path;
     };
   };
+
+  systemd.services."authelia-main".serviceConfig.EnvironmentFile =
+    config.sops.templates."authelia-env".path;
 }
