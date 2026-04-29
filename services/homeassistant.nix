@@ -24,13 +24,17 @@
     enable = true;
     openFirewall = false;
     extraComponents = [
+      "analytics"
+      "google_translate"
+      "isal"
       "met"
       "mqtt"
       "radio_browser"
+      "shopping_list"
       "esphome"
     ];
-    extraPackages = ps: with ps; [numpy];
     config = {
+      default_config = {};
       http = {
         server_host = "127.0.0.1";
         use_x_forwarded_for = true;
