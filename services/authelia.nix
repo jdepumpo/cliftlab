@@ -37,10 +37,7 @@
       default_2fa_method = "webauthn";
       server.address = "tcp://127.0.0.1:9092";
 
-      authentication_backend.file = {
-        path = config.sops.templates."authelia-users".path;
-        watch = true;
-      };
+      authentication_backend.file.path = config.sops.templates."authelia-users".path;
 
       session.cookies = [
         {
