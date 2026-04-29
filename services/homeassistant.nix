@@ -53,6 +53,10 @@
     providers = ["squeezelite" "spotify" "jellyfin"];
   };
 
+  # SlimProto port for Squeezelite player connections
+  networking.firewall.allowedTCPPorts = [3483];
+  networking.firewall.allowedUDPPorts = [3483];
+
   # iSponsorBlockTV has no NixOS module — run as a minimal systemd service
   # Config lives at /var/lib/isponsorblocktv/config.json; set it up manually then start the service
   systemd.services.isponsorblocktv = {
