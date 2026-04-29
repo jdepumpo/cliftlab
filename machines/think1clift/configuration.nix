@@ -37,8 +37,6 @@
         address = "192.168.0.204";
         prefixLength = 24;
       }];
-      # IPv6 via SLAAC (router advertisement) — no static address needed
-      ipv6.addresses = [];
     };
     defaultGateway = "192.168.0.1";
     defaultGateway6 = {
