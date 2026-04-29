@@ -29,6 +29,7 @@
       "radio_browser"
       "esphome"
     ];
+    extraPackages = ps: with ps; [numpy];
     config = {
       http = {
         server_host = "127.0.0.1";
