@@ -55,7 +55,10 @@
     settings = {
       permit_join = false;
       mqtt.server = "mqtt://localhost:1883";
-      serial.port = "/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0";
+      serial = {
+        port = "/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0";
+        adapter = "ember";
+      };
       frontend = {
         port = 8080;
         host = "127.0.0.1";
