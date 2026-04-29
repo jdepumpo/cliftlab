@@ -10,6 +10,12 @@
       service = name;
       entryPoints = ["web"];
     };
+    routers."${name}-secure" = {
+      rule = "Host(`${name}.clift.one`)";
+      service = name;
+      entryPoints = ["websecure"];
+      tls.certResolver = "cloudflare";
+    };
     services.${name} = {
       loadBalancer.servers = [{url = "http://localhost:${toString port}";}];
     };
