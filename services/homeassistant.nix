@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   environment.persistence."/nix/persist".directories = [
     {
       directory = "/var/lib/hass";
@@ -18,6 +18,9 @@
       group = "zigbee2mqtt";
       mode = "0700";
     }
+    # DynamicUser — systemd sets ownership on start
+    "/var/lib/music-assistant"
+    "/var/lib/isponsorblocktv"
   ];
 
   services.home-assistant = {
@@ -40,6 +43,26 @@
         use_x_forwarded_for = true;
         trusted_proxies = ["127.0.0.1"];
       };
+    };
+  };
+
+  services.music-assistant.enable = true;
+
+  # iSponsorBlockTV has no NixOS module — run as a minimal systemd service
+  # Config lives at /var/lib/isponsorblocktv/config.json; set it up manually then start the service
+  systemd.services.isponsorblocktv = {
+    description = "iSponsorBlockTV";
+    after = ["network-online.target"];
+    wants = ["network-online.target"];
+    wantedBy = ["multi-user.target"];
+    serviceConfig = {
+      ExecStart = "${pkgs.isponsorblocktv}/bin/iSponsorBlockTV";
+      DynamicUser = true;
+      StateDirectory = "isponsorblocktv";
+      WorkingDirectory = "/var/lib/isponsorblocktv";
+      Environment = "HOME=/var/lib/isponsorblocktv";
+      Restart = "on-failure";
+      RestartSec = "10s";
     };
   };
 
