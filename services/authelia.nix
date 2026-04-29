@@ -35,7 +35,7 @@
     settings = {
       theme = "dark";
       default_2fa_method = "webauthn";
-      server.address = "tcp://127.0.0.1:9091";
+      server.address = "tcp://127.0.0.1:9092";
 
       authentication_backend.file = {
         path = config.sops.templates."authelia-users".path;

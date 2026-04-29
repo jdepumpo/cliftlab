@@ -62,7 +62,7 @@ in {
   services.traefik.dynamicConfigOptions.http = lib.foldl lib.recursiveUpdate {} [
     {
       middlewares.authelia.forwardAuth = {
-        address = "http://127.0.0.1:9091/api/authz/forward-auth";
+        address = "http://127.0.0.1:9092/api/authz/forward-auth";
         trustForwardHeader = true;
         authResponseHeaders = ["Remote-User" "Remote-Groups" "Remote-Email" "Remote-Name"];
       };
@@ -77,7 +77,7 @@ in {
         entryPoints = ["websecure"];
         tls.certResolver = "cloudflare";
       };
-      services.authelia.loadBalancer.servers = [{url = "http://127.0.0.1:9091";}];
+      services.authelia.loadBalancer.servers = [{url = "http://127.0.0.1:9092";}];
     }
     (mkRoute "jellyfin" 8096 false)
     (mkRoute "sonarr" 8989 true)
