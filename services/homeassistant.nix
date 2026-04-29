@@ -62,7 +62,10 @@
       DynamicUser = true;
       StateDirectory = "isponsorblocktv";
       WorkingDirectory = "/var/lib/isponsorblocktv";
-      Environment = "HOME=/var/lib/isponsorblocktv";
+      Environment = [
+        "HOME=/var/lib/isponsorblocktv"
+        "iSPBTV_data_dir=/var/lib/isponsorblocktv"
+      ];
       Restart = "on-failure";
       RestartSec = "10s";
     };
