@@ -7,6 +7,7 @@
   sops.secrets."authelia-session-secret".owner = "authelia-main";
   sops.secrets."authelia-storage-key".owner = "authelia-main";
   sops.secrets."authelia-user-password-hash" = {};
+  sops.secrets."authelia-smtp-password".owner = "authelia-main";
 
   sops.templates."authelia-users" = {
     content = ''
@@ -49,7 +50,11 @@
 
       storage.local.path = "/var/lib/authelia-main/db.sqlite3";
 
-      notifier.filesystem.filename = "/var/lib/authelia-main/notifications.txt";
+      notifier.smtp = {
+        address = "smtps://mail.depumpo.com:465";
+        username = "links@jfd.is";
+        sender = "CliftONE Auth <auth@jfd.is>";
+      };
 
       access_control.default_policy = "two_factor";
 
@@ -65,6 +70,7 @@
       jwtSecretFile = config.sops.secrets."authelia-jwt-secret".path;
       sessionSecretFile = config.sops.secrets."authelia-session-secret".path;
       storageEncryptionKeyFile = config.sops.secrets."authelia-storage-key".path;
+      smtpPasswordFile = config.sops.secrets."authelia-smtp-password".path;
     };
   };
 }
