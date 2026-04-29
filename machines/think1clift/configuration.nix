@@ -17,6 +17,7 @@
     ./../../services/traefik.nix
     ./../../services/cloudflared.nix
     ./../../services/authelia.nix
+    ./../../services/homeassistant.nix
     ./../../services/nixarr.nix
   ];
 

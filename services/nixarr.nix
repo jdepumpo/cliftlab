@@ -79,6 +79,8 @@ in {
       };
       services.authelia.loadBalancer.servers = [{url = "http://127.0.0.1:9092";}];
     }
+    (mkRoute "ha" 8123 false)
+    (mkRoute "z2m" 8080 true)
     (mkRoute "jellyfin" 8096 false)
     (mkRoute "sonarr" 8989 true)
     (mkRoute "radarr" 7878 true)
