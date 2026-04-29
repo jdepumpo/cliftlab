@@ -58,10 +58,9 @@
 
       webauthn = {
         disable = false;
-        enable_passkeys = true;
         display_name = "clift.one";
         attestation_conveyance_preference = "indirect";
-        user_verification = "preferred";
+        selection_criteria.user_verification = "preferred";
       };
     };
 
