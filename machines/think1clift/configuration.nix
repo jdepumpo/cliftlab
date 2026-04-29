@@ -46,5 +46,7 @@
       address = "";
       interface = "enp0s31f6";
     };
+    # Services that self-reference via their public domain need to resolve locally
+    hosts."127.0.0.1" = ["cloud.clift.one"];
   };
 }
