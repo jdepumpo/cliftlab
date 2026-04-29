@@ -79,6 +79,7 @@ in {
       };
       services.authelia.loadBalancer.servers = [{url = "http://127.0.0.1:9092";}];
     }
+    (mkRoute "cloud" 9200 false)
     (mkRoute "ha" 8123 false)
     (mkRoute "z2m" 8080 true)
     (mkRoute "music" 8095 true)

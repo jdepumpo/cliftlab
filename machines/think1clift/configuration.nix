@@ -18,6 +18,7 @@
     ./../../services/cloudflared.nix
     ./../../services/authelia.nix
     ./../../services/homeassistant.nix
+    ./../../services/opencloud.nix
     ./../../services/nixarr.nix
   ];
 
