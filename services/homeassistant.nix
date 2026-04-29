@@ -18,9 +18,11 @@
       group = "zigbee2mqtt";
       mode = "0700";
     }
-    # DynamicUser services use /var/lib/private/* — systemd symlinks /var/lib/<name> there
-    "/var/lib/private/music-assistant"
-    "/var/lib/private/isponsorblocktv"
+    # DynamicUser services use /var/lib/private (mode 0700 required by systemd)
+    {
+      directory = "/var/lib/private";
+      mode = "0700";
+    }
   ];
 
   services.home-assistant = {
