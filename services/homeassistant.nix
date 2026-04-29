@@ -48,7 +48,10 @@
     };
   };
 
-  services.music-assistant.enable = true;
+  services.music-assistant = {
+    enable = true;
+    providers = ["squeezelite" "spotify" "jellyfin"];
+  };
 
   # iSponsorBlockTV has no NixOS module — run as a minimal systemd service
   # Config lives at /var/lib/isponsorblocktv/config.json; set it up manually then start the service
