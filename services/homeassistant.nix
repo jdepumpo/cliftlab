@@ -30,13 +30,14 @@
     openFirewall = false;
     extraComponents = [
       "analytics"
+      "bluetooth"
+      "esphome"
       "google_translate"
       "isal"
       "met"
       "mqtt"
       "radio_browser"
       "shopping_list"
-      "esphome"
     ];
     config = {
       default_config = {};
@@ -77,6 +78,13 @@
       RestartSec = "10s";
     };
   };
+
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+
+  users.users.hass.extraGroups = ["bluetooth"];
 
   # Local-only MQTT broker — open firewall port 1883 if IoT devices on LAN need access
   services.mosquitto = {
