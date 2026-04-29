@@ -57,7 +57,7 @@
       storage.local.path = "/var/lib/authelia-main/db.sqlite3";
 
       notifier.smtp = {
-        address = "smtps://mail.depumpo.com:465";
+        address = "submissions://mail.depumpo.com:465";
         username = "links@jfd.is";
         sender = "CliftONE Auth <auth@jfd.is>";
       };
