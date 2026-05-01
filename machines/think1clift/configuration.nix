@@ -19,6 +19,7 @@
     ./../../services/authelia.nix
     ./../../services/homeassistant.nix
     ./../../services/opencloud.nix
+    ./../../services/miniflux.nix
     ./../../services/nixarr.nix
   ];
 

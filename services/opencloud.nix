@@ -35,6 +35,13 @@
       NOTIFICATIONS_SMTP_SENDER = "CliftONE Cloud <cloud@jfd.is>";
       NOTIFICATIONS_SMTP_USERNAME = "links@jfd.is";
       NOTIFICATIONS_SMTP_ENCRYPTION = "ssl";
+
+      # External OIDC via Authelia — disables built-in IDP
+      OCIS_EXCLUDE_RUN_SERVICES = "idp";
+      PROXY_OIDC_ISSUER = "https://auth.clift.one";
+      OCIS_OIDC_ISSUER = "https://auth.clift.one";
+      WEB_OIDC_CLIENT_ID = "opencloud";
+      PROXY_AUTOPROVISION_ACCOUNTS = "true";
     };
   };
 }

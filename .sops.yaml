@@ -18,3 +18,8 @@ creation_rules:
       - age:
           - *think1clift
           - *joseph
+  - path_regex: secrets/authelia-oidc-jwk-rsa-key\.pem$
+    key_groups:
+      - age:
+          - *think1clift
+          - *joseph

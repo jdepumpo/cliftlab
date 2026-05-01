@@ -109,6 +109,7 @@ in {
     (mkRoute "bazarr" 6767 true)
     (mkRoute "transmission" 9091 true)
     (mkRoute "sabnzbd" 8085 true)
+    (mkRoute "rss" 8083 false)
   ];
 
   # Intel QSV / VA-API hardware transcoding for Jellyfin (M710q iGPU)
