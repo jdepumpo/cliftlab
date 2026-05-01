@@ -35,7 +35,7 @@
       OAUTH2_PROVIDER = "oidc";
       OAUTH2_CLIENT_ID = "miniflux";
       OAUTH2_REDIRECT_URL = "https://rss.clift.one/oauth2/oidc/callback";
-      OAUTH2_OIDC_DISCOVERY_ENDPOINT = "https://auth.clift.one/.well-known/openid-configuration";
+      OAUTH2_OIDC_DISCOVERY_ENDPOINT = "https://auth.clift.one";
       OAUTH2_USER_CREATION = "1";
     };
   };
