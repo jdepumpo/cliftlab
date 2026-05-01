@@ -1,6 +1,20 @@
-{config, ...}: {
-  sops.secrets."miniflux-admin-credentials" = {};
+{
+  config,
+  vars,
+  ...
+}: {
+  sops.secrets."miniflux-admin-password" = {};
   sops.secrets."miniflux-oidc-client-secret" = {};
+
+  # Renders a single env file containing all sensitive miniflux vars
+  sops.templates."miniflux-credentials" = {
+    content = ''
+      ADMIN_USERNAME=${vars.userName}
+      ADMIN_PASSWORD=${config.sops.placeholder."miniflux-admin-password"}
+      CREATE_ADMIN=1
+      OAUTH2_CLIENT_SECRET=${config.sops.placeholder."miniflux-oidc-client-secret"}
+    '';
+  };
 
   environment.persistence."/nix/persist".directories = [
     {
@@ -14,7 +28,7 @@
   services.miniflux = {
     enable = true;
     createDatabaseLocally = true;
-    adminCredentialsFile = config.sops.secrets."miniflux-admin-credentials".path;
+    adminCredentialsFile = config.sops.templates."miniflux-credentials".path;
     config = {
       LISTEN_ADDR = "127.0.0.1:8083";
       BASE_URL = "https://rss.clift.one";
@@ -25,17 +39,4 @@
       OAUTH2_USER_CREATION = "1";
     };
   };
-
-  sops.templates."miniflux-env" = {
-    content = ''
-      OAUTH2_CLIENT_SECRET=${config.sops.placeholder."miniflux-oidc-client-secret"}
-    '';
-  };
-
-  # adminCredentialsFile is already wired as EnvironmentFile by the module;
-  # override with a list to also inject the OIDC client secret
-  systemd.services.miniflux.serviceConfig.EnvironmentFile = [
-    config.sops.secrets."miniflux-admin-credentials".path
-    config.sops.templates."miniflux-env".path
-  ];
 }
