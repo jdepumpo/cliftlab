@@ -25,8 +25,17 @@
     enable = true;
     staticConfigOptions = {
       entryPoints = {
-        web.address = ":80";
+        web = {
+          address = ":80";
+          http.redirections.entrypoint = {
+            to = "websecure";
+            scheme = "https";
+            permanent = true;
+          };
+        };
         websecure.address = ":443";
+        # Localhost-only entrypoint for cloudflared (not exposed to firewall, no redirect)
+        internal.address = "127.0.0.1:8880";
       };
       certificatesResolvers.cloudflare.acme = {
         email = "jdepumpo@gmail.com";
