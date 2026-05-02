@@ -50,7 +50,6 @@
       };
       logger = {
         default = "warning";
-        logs."homeassistant.components.mqtt" = "debug";
       };
     };
   };
