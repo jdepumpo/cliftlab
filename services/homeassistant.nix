@@ -37,6 +37,7 @@
       "met"
       "mqtt"
       "radio_browser"
+      "roku"
       "shopping_list"
     ];
     config = {
