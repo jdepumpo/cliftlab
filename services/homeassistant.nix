@@ -33,6 +33,7 @@
       "bluetooth"
       "esphome"
       "google_translate"
+      "ibeacon"
       "isal"
       "met"
       "mqtt"
@@ -90,6 +91,7 @@
   # Local-only MQTT broker — open firewall port 1883 if IoT devices on LAN need access
   services.mosquitto = {
     enable = true;
+    persistence = true;
     listeners = [
       {
         address = "127.0.0.1";
