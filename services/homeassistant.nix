@@ -40,6 +40,7 @@
       "radio_browser"
       "roku"
       "shopping_list"
+      "opower"
     ];
     config = {
       default_config = {};
