@@ -51,13 +51,12 @@ in {
     transmission = {
       enable = true;
       vpn.enable = true;
-      vpn.openTcpPorts = [9091];
     };
 
     sabnzbd = {
       enable = true;
       vpn.enable = true;
-      vpn.openTcpPorts = [8085];
+      guiPort = 6336;
     };
   };
 
@@ -110,7 +109,7 @@ in {
     (mkRoute "prowlarr" 9696 true)
     (mkRoute "bazarr" 6767 true)
     (mkRoute "transmission" 9091 true)
-    (mkRoute "sabnzbd" 8085 true)
+    (mkRoute "sabnzbd" 6336 true)
     (mkRoute "rss" 8083 false)
   ];
 
