@@ -35,7 +35,10 @@
 
   sops = {
     defaultSopsFile = ./../../secrets/secrets.yaml;
-    age.sshKeyPaths = ["/nix/secret/initrd/ssh_host_ed25519_key"];
+    age.sshKeyPaths = [
+      "/nix/secret/initrd/ssh_host_ed25519_key" # servers (remote-unlock initrd key)
+      "/etc/ssh/ssh_host_ed25519_key" # desktops (regular host key)
+    ];
     secrets."user-password".neededForUsers = true;
     secrets."user-password" = {};
     # inspo: https://github.com/Mic92/sops-nix/issues/427
@@ -68,8 +71,6 @@
 
   networking = {
     firewall.enable = true;
-    useDHCP = false;
-    networkmanager.enable = false;
     nameservers = ["1.1.1.1" "1.0.0.1" "2606:4700:4700::1111" "2606:4700:4700::1001"];
   };
 

@@ -36,6 +36,8 @@
 
   networking = {
     hostName = "think1clift";
+    useDHCP = false;
+    networkmanager.enable = false;
     interfaces.enp0s31f6 = {
       ipv4.addresses = [{
         address = "192.168.0.204";

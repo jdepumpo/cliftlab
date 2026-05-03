@@ -1,5 +1,8 @@
 keys:
   - &think1clift age1ek0npcn04kva8gn4jm76tza5yrwtfgk2mtyhykhvuxpfam3et5xqyp8jx4
+  # TODO: replace with real key — run on dell1clift after install:
+  #   nix-shell -p ssh-to-age --run 'ssh-to-age < /etc/ssh/ssh_host_ed25519_key.pub'
+  - &dell1clift age1REPLACEME
   - &joseph age17er3p56wlm5y840gjamz7hpgmp0mxyall0s6sn5t22wkqu746fvq2l9hsu
 
 creation_rules:
@@ -7,19 +10,23 @@ creation_rules:
     key_groups:
       - age:
           - *think1clift
+          - *dell1clift
           - *joseph
   - path_regex: secrets/cloudflare-tunnel$
     key_groups:
       - age:
           - *think1clift
+          - *dell1clift
           - *joseph
   - path_regex: secrets/mullvad-wg\.conf$
     key_groups:
       - age:
           - *think1clift
+          - *dell1clift
           - *joseph
   - path_regex: secrets/authelia-oidc-jwk-rsa-key\.pem$
     key_groups:
       - age:
           - *think1clift
+          - *dell1clift
           - *joseph

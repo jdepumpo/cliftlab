@@ -39,11 +39,18 @@
         specialArgs = {inherit inputs outputs vars;};
         modules = [inputs.nixarr.nixosModules.default path];
       };
+
+    mkDesktopConfig = path:
+      nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs vars;};
+        modules = [path];
+      };
   in {
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
     nixosConfigurations = {
       think1clift = mkNixOSConfig ./machines/think1clift/configuration.nix;
+      dell1clift = mkDesktopConfig ./machines/dell1clift/configuration.nix;
       iso1clift = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {inherit inputs outputs vars;};
