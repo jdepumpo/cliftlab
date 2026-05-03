@@ -51,11 +51,13 @@ in {
     transmission = {
       enable = true;
       vpn.enable = true;
+      vpn.openTcpPorts = [9091];
     };
 
     sabnzbd = {
       enable = true;
       vpn.enable = true;
+      vpn.openTcpPorts = [8085];
     };
   };
 
