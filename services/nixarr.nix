@@ -36,7 +36,7 @@ in {
     owner = "recyclarr";
     content = ''
       sonarr:
-        main:
+        sonarr:
           base_url: http://localhost:8989
           api_key: ${config.sops.placeholder."sonarr-api-key"}
           include:
@@ -53,7 +53,7 @@ in {
               anime: default
 
       radarr:
-        main:
+        radarr:
           base_url: http://localhost:7878
           api_key: ${config.sops.placeholder."radarr-api-key"}
           include:
