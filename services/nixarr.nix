@@ -61,7 +61,7 @@ in {
             - template: radarr-quality-profile-web-1080p
             - template: radarr-custom-formats-web-1080p
           media_naming:
-            movies:
+            movie:
               rename: true
               standard: default
     '';
