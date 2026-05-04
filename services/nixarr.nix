@@ -29,6 +29,43 @@ in {
     format = "binary";
     sopsFile = ./../secrets/mullvad-wg.conf;
   };
+  sops.secrets."sonarr-api-key" = {};
+  sops.secrets."radarr-api-key" = {};
+
+  sops.templates."recyclarr.yml" = {
+    owner = "recyclarr";
+    content = ''
+      sonarr:
+        main:
+          base_url: http://localhost:8989
+          api_key: ${config.sops.placeholder."sonarr-api-key"}
+          include:
+            - template: sonarr-quality-definition-series
+            - template: sonarr-v4-quality-profile-web-1080p
+            - template: sonarr-v4-custom-formats-web-1080p
+          media_naming:
+            series: plex
+            season: default
+            episodes:
+              rename: true
+              standard: default
+              daily: default
+              anime: default
+
+      radarr:
+        main:
+          base_url: http://localhost:7878
+          api_key: ${config.sops.placeholder."radarr-api-key"}
+          include:
+            - template: radarr-quality-definition-movie
+            - template: radarr-quality-profile-web-1080p
+            - template: radarr-custom-formats-web-1080p
+          media_naming:
+            movies:
+              rename: true
+              standard: default
+    '';
+  };
 
   nixarr = {
     enable = true;
@@ -58,6 +95,11 @@ in {
       vpn.enable = true;
       guiPort = 6336;
       whitelistHostnames = ["sabnzbd.clift.one"];
+    };
+
+    recyclarr = {
+      enable = true;
+      configFile = config.sops.templates."recyclarr.yml".path;
     };
   };
 
