@@ -40,7 +40,7 @@ in {
           base_url: http://localhost:8989
           api_key: ${config.sops.placeholder."sonarr-api-key"}
           include:
-            - template: web-1080p
+            - template: web-1080p-v4
           media_naming:
             series: plex
             season: default
