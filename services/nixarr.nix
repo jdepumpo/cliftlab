@@ -44,7 +44,7 @@ in {
             - template: sonarr-v4-quality-profile-web-1080p
             - template: sonarr-v4-custom-formats-web-1080p
           media_naming:
-            series: plex
+            series: jellyfin-tvdb
             season: default
             episodes:
               rename: true
@@ -63,7 +63,7 @@ in {
           media_naming:
             movie:
               rename: true
-              standard: default
+              standard: jellyfin-tmdb
     '';
   };
 
