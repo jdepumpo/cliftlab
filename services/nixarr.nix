@@ -114,6 +114,19 @@ in {
     (mkRoute "rss" 8083 false)
   ];
 
+  # TRaSH-recommended media library dirs — siblings of usenet/ and torrents/ so
+  # hardlinks work across download clients and library (all same filesystem).
+  # nixarr manages usenet/ and torrents/ automatically; these are the library roots.
+  systemd.tmpfiles.rules = let
+    mediaDir = "/nix/persist/media";
+    mkMediaDir = path: "d ${mediaDir}/${path} 0775 root media -";
+  in [
+    (mkMediaDir "movies")
+    (mkMediaDir "tv")
+    (mkMediaDir "music")
+    (mkMediaDir "books")
+  ];
+
   # Intel QSV / VA-API hardware transcoding for Jellyfin (M710q iGPU)
   hardware.graphics = {
     enable = true;
