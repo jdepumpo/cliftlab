@@ -57,6 +57,7 @@ in {
       enable = true;
       vpn.enable = true;
       guiPort = 6336;
+      whitelistHostnames = ["sabnzbd.clift.one"];
     };
   };
 
