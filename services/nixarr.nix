@@ -103,6 +103,13 @@ in {
     };
   };
 
+  # nixarr doesn't expose rpc-host-whitelist; set it directly so Traefik's
+  # Host header (transmission.clift.one) isn't rejected by the RPC server.
+  services.transmission.settings = {
+    "rpc-host-whitelist-enabled" = true;
+    "rpc-host-whitelist" = "transmission.clift.one";
+  };
+
   services.traefik.dynamicConfigOptions.http = lib.foldl lib.recursiveUpdate {} [
     {
       middlewares.authelia.forwardAuth = {
