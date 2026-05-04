@@ -40,9 +40,7 @@ in {
           base_url: http://localhost:8989
           api_key: ${config.sops.placeholder."sonarr-api-key"}
           include:
-            - template: sonarr-quality-definition-series
-            - template: sonarr-v4-quality-profile-web-1080p
-            - template: sonarr-v4-custom-formats-web-1080p
+            - template: web-1080p
           media_naming:
             series: plex
             season: default
@@ -57,9 +55,7 @@ in {
           base_url: http://localhost:7878
           api_key: ${config.sops.placeholder."radarr-api-key"}
           include:
-            - template: radarr-quality-definition-movie
-            - template: radarr-quality-profile-web-1080p
-            - template: radarr-custom-formats-web-1080p
+            - template: hd-bluray-web
           media_naming:
             movie:
               rename: true
